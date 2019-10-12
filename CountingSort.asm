@@ -1,4 +1,5 @@
 .data
+#Lista a ser ordenada(arrayOrig)
 	arrayOrig: .word 3223, 234, 453, 5234, 2, 13123, 34, 324234, 45, 2342, 440, 20299, 23834, 112, 124, 434
 	arrayFinal: .word 0:16
 	arrayCount: .word 0:324234
@@ -14,12 +15,12 @@ add $s7, $zero, 324234
 # Limpar Index($t0) e Index 2($t1) para 0
 add $t0, $zero, 0
 add $t1, $zero, 0
-# Atribui ‡ lista de contagem(arrayCount) +1 a cada vez que o valor de index aparece na lista original(arrayOrig)
+# Atribui √† lista de contagem(arrayCount) +1 a cada vez que o valor de index aparece na lista original(arrayOrig)
 whileAtribuir:
 	beq $t0, $s6, exitAtribuir
 	lw $s0, arrayOrig($t0)
 	
-	#atribuir ao index o valor da posiÁ„o
+	#atribuir ao index o valor da posi√ß√£o
 	mul $t1, $s0, 4
 	 
 	lw $s0, arrayCount($t1)
@@ -58,7 +59,7 @@ whileOrdenacao:
 	#busca o indice na lista de contagem(arayCount)
 	lw $s1, arrayCount($t1)
 		sub $s1, $s1, 1
-			# Subtrai o valor na lista de contagem(caso de repetiÁ„o)
+			# Subtrai o valor na lista de contagem(caso de repeti√ß√£o)
 			sw $s1, arrayCount($t1)
 		mul $t2, $s1, 4
 	#Armazena o valor na lista final
@@ -68,7 +69,7 @@ whileOrdenacao:
 	j whileOrdenacao
 exitOrdenacao:
 
-# Limpar Index($t0) para primeira a posiÁ„o v·lida da lista(1)
+# Limpar Index($t0) para primeira a posi√ß√£o v√°lida da lista(1)
 add $t0, $zero, 0
 whilePrint:
 	beq $t0, $s6, exitPrint
@@ -80,7 +81,7 @@ whilePrint:
 	move $a0, $s0
 	syscall
 	
-	# Imprime um espaÁo
+	# Imprime um espa√ßo
 	li $v0, 11
 	la $a0, ' '
 	syscall
